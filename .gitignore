@@ -10,8 +10,3 @@ __pycache__/
 .playwright-cli/
 output/playwright/
 output/lighthouse/initial-*
-backend/python_modules/
-
-.venv-workers/
-backend/src/vendor/
-backend/.python-workers/

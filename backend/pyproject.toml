@@ -1,18 +1,5 @@
 [project]
 name = "kvarta"
 version = "0.1.0"
-requires-python = ">=3.13"
-dependencies = ["fastapi"]
-
-[dependency-groups]
-dev = [
-    "workers-py",
-    "workers-runtime-sdk",
-    "httpx",
-    "pillow",
-    "fonttools>=4.67.0",
-    "brotli>=1.2.0",
-]
-
-[tool.pytest.ini_options]
-pythonpath = ["backend/src"]
+requires-python = ">=3.11"
+dependencies = []

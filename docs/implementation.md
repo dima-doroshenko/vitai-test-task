@@ -27,8 +27,9 @@
 5 ГБ на аккаунт, до 10 БД. Доступные квоты аккаунта проверяются отдельно.
 
 Публикация: Wrangler Direct Upload (не Git Integration), только public/.
-Preview использует отдельный Python Worker и отдельную D1, Telegram выключен.
+На первом этапе preview использовал отдельный Python Worker и отдельную D1,
+Telegram выключен. В финальной версии оба Worker работают на JavaScript.
 Worker не имеет публичного workers.dev URL; доступ через Service Binding.
 
 ## Согласованное изменение 2026-10-17
-Пользователь выбрал Free + JavaScript Worker после воспроизводимого превышения CPU Python/FastAPI (docs/cpu-smoke.json). Итог: Pages → JS proxy → JS Worker → D1. Оплата не подключалась. Python smoke сохранён в src/entry.py только как воспроизводимый эксперимент; он больше не развёртывается.
+Пользователь выбрал Free + JavaScript Worker после воспроизводимого превышения CPU Python/FastAPI (docs/cpu-smoke.json). Итог: Pages → JS proxy → JS Worker → D1. Оплата не подключалась. Неиспользуемый Python smoke удалён из текущих исходников; эксперимент и его зависимости доступны в истории Git, коммит `04cd9ea`.
