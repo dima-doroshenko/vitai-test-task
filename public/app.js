@@ -9,20 +9,10 @@ try{const saved=JSON.parse(sessionStorage.getItem('kvarta-first-touch'));if(save
 const current=keys.some(k=>touch[k])?touch:null;
 const form=document.querySelector('#lead-form'),submit=document.querySelector('#submit'),status=document.querySelector('#form-status');
 const fields=['name','phone','interest','comment'];submit.disabled=false;let sending=false;
-// Keep the whole active field above a mobile keyboard, including browsers
-// that resize only visualViewport rather than the layout viewport.
-function keepFieldVisible(){
-  const active=document.activeElement;
-  if(!form.contains(active)||!active.matches('input:not([type="hidden"]),select,textarea'))return;
-  const view=window.visualViewport,top=view?.offsetTop||0,height=view?.height||innerHeight;
-  const rect=active.getBoundingClientRect();
-  if(rect.top<top+16||rect.bottom>top+height-16)window.scrollBy({top:rect.top-top-Math.max(16,(height-rect.height)/2),behavior:'instant'});
-}
-form.addEventListener('focusin',keepFieldVisible);
-window.visualViewport?.addEventListener('resize',keepFieldVisible);
+const submitContent=submit.innerHTML;
 function error(k,message=''){const input=form.elements[k],target=document.querySelector(`#${k}-error`);if(input&&target){target.textContent=message;if(message)input.setAttribute('aria-invalid','true');else input.removeAttribute('aria-invalid');}}
 for(const k of fields)form.elements[k].addEventListener('input',()=>error(k));
-document.querySelectorAll('[data-interest]').forEach(link=>link.addEventListener('click',()=>{form.elements.interest.value=link.dataset.interest;form.elements.context.value=link.dataset.context||'';const label=document.querySelector('#context-label');label.hidden=!link.dataset.context;label.textContent=link.dataset.context?`Вы выбрали: ${link.dataset.context}`:'';error('interest');setTimeout(()=>{if(!sending)form.elements.name.focus({preventScroll:true});},matchMedia('(prefers-reduced-motion: reduce)').matches?0:350);}));
+document.querySelectorAll('[data-interest]').forEach(link=>link.addEventListener('click',()=>{form.elements.interest.value=link.dataset.interest;form.elements.context.value=link.dataset.context||'';const label=document.querySelector('#context-label');label.hidden=!link.dataset.context;label.textContent=link.dataset.context?`Вы выбрали: ${link.dataset.context}`:'';error('interest');}));
 form.addEventListener('submit',async event=>{
 event.preventDefault();if(sending)return;status.textContent='';status.className='';fields.forEach(k=>error(k));const data=Object.fromEntries(new FormData(form)),errors={};
 if(!data.name.trim())errors.name='Подскажите, как к вам обращаться.';else if(data.name.length>80)errors.name='Имя должно быть не длиннее 80 символов.';
@@ -37,5 +27,5 @@ else if(response.status===409&&result.code==='duplicate'){status.textContent='З
 else if(response.status===422&&result.fields){for(const[k,v]of Object.entries(result.fields))if(fields.includes(k))error(k,v);status.textContent=result.fields.form||'Проверьте отмеченные поля и попробуйте ещё раз.';const invalid=form.querySelector('[aria-invalid="true"]');if(invalid)invalid.focus();}
 else status.textContent=response.status===413?'Заявка слишком большая. Сократите комментарий и попробуйте снова.':'Сервис временно недоступен. Данные сохранены в форме — попробуйте отправить ещё раз.';
 }catch{status.textContent='Не удалось получить ответ. Возможно, заявка уже принята. Проверьте соединение и попробуйте ещё раз — повторную заявку мы не создадим в течение 10 минут.';}
-finally{sending=false;submit.disabled=false;submit.innerHTML='Оставить заявку <span aria-hidden="true">↗</span>';submit.removeAttribute('aria-busy');if(!form.querySelector('[aria-invalid="true"]'))status.focus({preventScroll:false});}
+finally{sending=false;submit.disabled=false;submit.innerHTML=submitContent;submit.removeAttribute('aria-busy');if(!form.querySelector('[aria-invalid="true"]'))status.focus({preventScroll:false});}
 });
