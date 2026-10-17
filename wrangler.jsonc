@@ -1,0 +1,11 @@
+{
+  "name": "kvarta-minsk",
+  "pages_build_output_dir": "./public",
+  "compatibility_date": "2026-10-17",
+  "services": [{"binding": "LEADS", "service": "kvarta-api"}],
+  "vars": {"ENVIRONMENT": "production"},
+  "env": {"preview": {
+    "services": [{"binding": "LEADS", "service": "kvarta-api-preview"}],
+    "vars": {"ENVIRONMENT": "preview"}
+  }}
+}
