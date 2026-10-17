@@ -45,3 +45,40 @@ no watermark. Illustrative generated packaging, not actual product photos.
 Исходный PNG создан встроенным инструментом в каталоге generated_images
 пользователя; все используемые оптимизированные результаты скопированы в
 проект. Публичный сайт не зависит от этого внешнего пути.
+
+## Обновление визуала 2026-10-17
+
+- `hero-workshop-1672.webp`, `hero-workshop-800.webp`: предоставленный
+  пользователем `kvarta-hero-photo.png` (1672 × 941), сгенерированный встроенным
+  ImageGen. Ручная фасовка кофе, естественный свет, свободное место слева.
+  Исходный файл: `Documents/Codex/2026-10-17/jw/outputs/kvarta-hero-photo.png`.
+- `workshop.webp`: встроенный ImageGen, иллюстративная мастерская и два
+  вымышленных обжарщика у ростера. Это не фотография реальных основателей.
+  Промпт: documentary portrait 4:5, woman checking roasted beans in cooling
+  tray, man using sample scoop beside compact roaster, natural window light,
+  olive aprons and linen shirts, candid working scene, no text or watermark.
+- `ethiopia-studio.webp`, `colombia-studio.webp`, `brazil-studio.webp`,
+  `drips-studio.webp`: кадры одного сгенерированного ImageGen предметного
+  фото. Промпт: four evenly spaced kraft products on seamless pale ivory
+  studio background, frontal view, equal scale, soft daylight, no props;
+  cream labels, condensed Cyrillic typography inspired by Oswald, lowercase
+  «кварта» and eight-spoke star, readable variety names and weight;
+  ochre / terracotta / green accent stripes. Три пачки по 250 г и коробка
+  из 10 дрип-пакетов.
+- `subscription-pair.webp`: встроенный ImageGen. Промпт: exactly two kraft
+  250g pouches, «кварта», «ИРГАЧЕФФЕ / ЭФИОПИЯ» and «УИЛА / КОЛУМБИЯ»,
+  condensed Cyrillic type, cream labels with ochre and terracotta stripes,
+  limestone tabletop, olive wall, natural morning light, no other products.
+
+Новые PNG сохранены ImageGen в пользовательском `generated_images`.
+Опубликованные локальные WebP подготовлены Sharp (кадрирование, уменьшение,
+сжатие без метаданных). Sharp использован разово, зависимостей проекта нет.
+Прежние исходные assets и сведения об их лицензиях сохранены;
+`og.jpg` пока использует прежнюю иллюстрацию упаковки.
+
+- `og-workshop-v2.jpg`: новая карточка для мессенджеров, 1200 × 630.
+  Предоставленное пользователем фото фасовки из нового hero, логотип со
+  SVG-знаком и текст шрифтами Oswald/Manrope. Композиция свёрстана в HTML/CSS,
+  отрендерена Chrome через Playwright и сохранена в JPEG через Sharp.
+  Старый `og.jpg` сохранён; актуальные Open Graph / Twitter метаданные
+  ссылаются на `og-workshop-v2.jpg`.

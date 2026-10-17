@@ -66,6 +66,8 @@ npx wrangler pages dev public --env preview --service LEADS=kvarta-api-preview
 
 Конфигурации: `wrangler.jsonc` (Pages) и `backend/wrangler.jsonc` (Worker). Workers не имеют публичных workers.dev/preview URL. Прокси передаёт `X-Kvarta-Environment`, Worker сверяет его с `ENVIRONMENT`. Не смешивайте bindings и базы окружений.
 
+В исходном HTML абсолютные Open Graph / Twitter URL ведут на production. При preview-публикации замените origin только в `og:url`, `og:image` и `twitter:image` на `https://staging.kvarta-minsk.pages.dev`; после загрузки восстановите исходный HTML. Canonical остаётся production. Новому изображению превью задавайте новое имя файла.
+
 Preview:
 
 ```sh
