@@ -2,20 +2,20 @@
   "url": "https://kvarta-minsk.pages.dev/",
   "clientDate": "2026-10-17",
   "timezone": "Europe/Minsk",
-  "sourceCommit": "fc299740072b06a3428bf317798a5c312bc6ef21",
-  "pagesDeployment": "https://3ad5aa00.kvarta-minsk.pages.dev",
+  "sourceCommit": "03e1a6cba214aa07a7760250f09a39a3c800ae94",
+  "pagesDeployment": "https://397d9ffb.kvarta-minsk.pages.dev",
   "workerVersion": "60fd62c5-332c-4e11-b4de-26f7351ac46d",
   "protocol": "Sequential CLI runs on the same host. Each run launches a fresh headless Chrome profile. Three identical default mobile/simulate runs; separate desktop preset. No local scores.",
   "hashes": {
     "public/index.html": "d8e45a250206f29819ec77ab54bc8be50921da62747e389c70308d886141b983",
     "public/style.css": "caf3f9ec763d23994c0ac58360e5ec445bfad2a3ebfbcaffe97cff79866f6bd8",
-    "public/app.js": "7b2fc6df6c27e377197b605c34ed1e86bc8dd49f8dd5adba899cbd1e20d52a64",
+    "public/app.js": "5b9a47f432a6079ebe637eefa097a6f11b4a9beb539f82ab45428bcea873efec",
     "public/phone.js": "0b9a4c96f52c8a5891bb9081330751629ae4c01d653b70c8ea799d2c1dffb849",
     "functions/api/lead.js": "fdb4a94412765efa45c071f5844c930b9072ec57e01567fd271242ffe5ab31f6",
     "backend/src/worker.js": "f62c71217f1bd16b5236a3be3c9e83d6447bcf059166c1c3037b85708bb2398a"
   },
   "mobileMedian": {
-    "performance": 100,
+    "performance": 98,
     "accessibility": 100,
     "best-practices": 100,
     "seo": 100
@@ -29,7 +29,7 @@
         "best-practices": 100,
         "seo": 100
       },
-      "fetchTime": "2026-10-17T13:11:02.478Z",
+      "fetchTime": "2026-10-17T13:16:26.401Z",
       "lighthouseVersion": "13.5.0",
       "requestedUrl": "https://kvarta-minsk.pages.dev/",
       "finalDisplayedUrl": "https://kvarta-minsk.pages.dev/",
@@ -37,7 +37,7 @@
       "environment": {
         "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
         "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
-        "benchmarkIndex": 4582.5,
+        "benchmarkIndex": 4580.5,
         "credits": {
           "axe-core": "4.14.0"
         }
@@ -102,11 +102,11 @@
         "skipAudits": null
       },
       "metrics": {
-        "first-contentful-paint": 1106.498,
-        "largest-contentful-paint": 1734.498,
+        "first-contentful-paint": 1042.507,
+        "largest-contentful-paint": 1685.507,
         "total-blocking-time": 0,
         "cumulative-layout-shift": 0,
-        "speed-index": 2113.065633953524
+        "speed-index": 2236.2015684206494
       },
       "reports": [
         "mobile-1.report.html",
@@ -116,12 +116,12 @@
     {
       "name": "mobile-2",
       "scores": {
-        "performance": 100,
+        "performance": 98,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
       },
-      "fetchTime": "2026-10-17T13:11:14.211Z",
+      "fetchTime": "2026-10-17T13:16:37.841Z",
       "lighthouseVersion": "13.5.0",
       "requestedUrl": "https://kvarta-minsk.pages.dev/",
       "finalDisplayedUrl": "https://kvarta-minsk.pages.dev/",
@@ -129,7 +129,7 @@
       "environment": {
         "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
         "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
-        "benchmarkIndex": 4730,
+        "benchmarkIndex": 4675.5,
         "credits": {
           "axe-core": "4.14.0"
         }
@@ -194,11 +194,11 @@
         "skipAudits": null
       },
       "metrics": {
-        "first-contentful-paint": 970.14,
-        "largest-contentful-paint": 1611.1399999999999,
+        "first-contentful-paint": 1085.036,
+        "largest-contentful-paint": 1700.036,
         "total-blocking-time": 0,
         "cumulative-layout-shift": 0,
-        "speed-index": 1995.4460638778223
+        "speed-index": 4069.0447838543887
       },
       "reports": [
         "mobile-2.report.html",
@@ -208,12 +208,12 @@
     {
       "name": "mobile-3",
       "scores": {
-        "performance": 97,
+        "performance": 98,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
       },
-      "fetchTime": "2026-10-17T13:11:25.364Z",
+      "fetchTime": "2026-10-17T13:16:50.368Z",
       "lighthouseVersion": "13.5.0",
       "requestedUrl": "https://kvarta-minsk.pages.dev/",
       "finalDisplayedUrl": "https://kvarta-minsk.pages.dev/",
@@ -221,7 +221,7 @@
       "environment": {
         "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
         "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
-        "benchmarkIndex": 4699,
+        "benchmarkIndex": 4608,
         "credits": {
           "axe-core": "4.14.0"
         }
@@ -286,11 +286,11 @@
         "skipAudits": null
       },
       "metrics": {
-        "first-contentful-paint": 1093.7240000000002,
-        "largest-contentful-paint": 1754.7240000000002,
+        "first-contentful-paint": 990.6959999999999,
+        "largest-contentful-paint": 1625.196,
         "total-blocking-time": 0,
         "cumulative-layout-shift": 0,
-        "speed-index": 4160.6713419044945
+        "speed-index": 4077.0746139716143
       },
       "reports": [
         "mobile-3.report.html",
@@ -305,7 +305,7 @@
         "best-practices": 100,
         "seo": 100
       },
-      "fetchTime": "2026-10-17T13:11:38.223Z",
+      "fetchTime": "2026-10-17T13:17:02.854Z",
       "lighthouseVersion": "13.5.0",
       "requestedUrl": "https://kvarta-minsk.pages.dev/",
       "finalDisplayedUrl": "https://kvarta-minsk.pages.dev/",
@@ -313,7 +313,7 @@
       "environment": {
         "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
         "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
-        "benchmarkIndex": 4701,
+        "benchmarkIndex": 4661,
         "credits": {
           "axe-core": "4.14.0"
         }
@@ -378,11 +378,11 @@
         "skipAudits": null
       },
       "metrics": {
-        "first-contentful-paint": 393.0045,
-        "largest-contentful-paint": 599.5045,
+        "first-contentful-paint": 375.8005,
+        "largest-contentful-paint": 582.3005,
         "total-blocking-time": 0,
-        "cumulative-layout-shift": 0,
-        "speed-index": 829.5425968375941
+        "cumulative-layout-shift": 5.83451536643026e-05,
+        "speed-index": 818.2434979777694
       },
       "reports": [
         "desktop.report.html",
@@ -390,6 +390,6 @@
       ]
     }
   ],
-  "pagesDeploymentId": "3ad5aa00-c55c-49a2-ba91-7da2b36ac894",
-  "cloudflareCommit": "fc299740072b06a3428bf317798a5c312bc6ef21"
+  "pagesDeploymentId": "397d9ffb-91b1-4dd5-ac9b-1ebdb3103d43",
+  "cloudflareCommit": "03e1a6cba214aa07a7760250f09a39a3c800ae94"
 }

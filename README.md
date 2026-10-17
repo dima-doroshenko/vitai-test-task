@@ -75,6 +75,7 @@ Telegram работает после записи через Cron (одна за
 - [Полный запуск, API-контракт, миграции и ограничения](docs/operations.md).
 - [Источники и лицензии изображений, шрифтов и BY-метаданных](docs/materials.md).
 - [Фактическая проверка](docs/verification.md), [D1/Telegram](docs/production-check.json).
+- Серия замеров: `node scripts/lighthouse.mjs <deployment-url> <worker-version>`.
 - Lighthouse HTML/JSON: `output/lighthouse/`, параметры и медианы —
   `output/lighthouse/summary.json`. Отчёты не попадают в public.
 - Исходный README пользователя сохранён: [original-readme.md](docs/original-readme.md).
