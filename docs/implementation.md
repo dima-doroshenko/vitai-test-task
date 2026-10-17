@@ -29,3 +29,6 @@
 Публикация: Wrangler Direct Upload (не Git Integration), только public/.
 Preview использует отдельный Python Worker и отдельную D1, Telegram выключен.
 Worker не имеет публичного workers.dev URL; доступ через Service Binding.
+
+## Согласованное изменение 2026-10-17
+Пользователь выбрал Free + JavaScript Worker после воспроизводимого превышения CPU Python/FastAPI (docs/cpu-smoke.json). Итог: Pages → JS proxy → JS Worker → D1. Оплата не подключалась. Python smoke сохранён в src/entry.py только как воспроизводимый эксперимент; он больше не развёртывается.

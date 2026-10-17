@@ -4,7 +4,8 @@ from workers import asgi
 import json
 import uuid
 
-app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
+app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None,
+              telemetry={"tracing": False, "metrics": False, "logs": False})
 
 
 @app.post("/api/lead")

@@ -1,10 +1,7 @@
 {
   "name": "kvarta-api",
-  "main": "src/entry.py",
+  "main": "src/worker.js",
   "compatibility_date": "2026-10-17",
-  "compatibility_flags": [
-    "python_workers"
-  ],
   "workers_dev": false,
   "preview_urls": false,
   "observability": {
@@ -41,7 +38,15 @@
           "database_id": "d1f5cd12-f965-433e-8b4e-a0313c76e4c1",
           "migrations_dir": "migrations"
         }
-      ]
+      ],
+      "triggers": {
+        "crons": []
+      }
     }
+  },
+  "triggers": {
+    "crons": [
+      "* * * * *"
+    ]
   }
 }
