@@ -1,88 +1,62 @@
 # Кварта · обжарка кофе
 
-Адаптивный учебный лендинг вымышленной мастерской, русский язык, BYN.
+- [Сайт](https://kvarta-minsk.pages.dev/)
+- [Репозиторий](https://github.com/dima-doroshenko/vitai-test-task)
 
-- Сайт: https://kvarta-minsk.pages.dev/
-- Preview: https://staging.kvarta-minsk.pages.dev/
-- Репозиторий: https://github.com/dima-doroshenko/vitai-test-task
+## Что делал сам и что поручил ИИ
 
-## Архитектура
+Я задавал направление работы: подготовил с помощью ChatGPT [референс дизайна](https://chatgpt.com/s/cx_6ad367c91a748191a2750cea703a0964) и [промпт для Codex](https://chatgpt.com/s/cx_6ad367e5f3448191829471fb723bb965), согласовывал технические решения, проверял настольную и мобильную версии и давал конкретные замечания. Отдельно попросил доработать маску телефона: закрепить код `+375` и форматировать номер как `+375 (XX) XXX-XX-XX`.
 
-HTML/CSS/обычный JS → `/api/lead` → Pages Function → Service Binding →
-JavaScript Worker → D1. Статика не проходит через API. Без корзины и оплаты.
+Codex написал основную часть кода, настроил хранение заявок и уведомления в Telegram, подготовил тесты и публикацию. Часть иллюстраций сгенерирована ИИ, остальные фотографии взяты с Pexels и Unsplash. Источники и лицензии перечислены в [документации материалов](docs/materials.md).
 
-**Изменение согласовано пользователем:** сначала опубликован Python/FastAPI
-через pywrangler, но фактические 14–168 мс CPU превысили Free budget 10 мс.
-Пользователь выбрал Free + JavaScript Worker. JS показал 0–5 мс в 27 реальных
-запросах. Оплата не подключалась. Эксперимент: коммит `04cd9ea`,
-[измерения Python](docs/cpu-smoke.json), [измерения JS](docs/cpu-javascript.json).
+## Технические решения
 
-D1 хранит заявки и outbox. SQL trigger атомарно запрещает вторую заявку
-с нормализованным телефоном в скользящие 600 секунд; повтор окно не
-продлевает. Все SQL-запросы подготовленные, время задаёт D1 в UTC.
+Frontend написан на HTML, CSS и обычном JavaScript, без фреймворка и сборки. Сайт размещён на Cloudflare Pages, API работает в JavaScript Worker.
 
-## Запуск
+Для хранения заявок выбрал Cloudflare D1, поскольку она нативно интегрируется с Cloudflare Workers. Это позволяет работать с базой напрямую из Worker без отдельного сервера БД и настройки подключения. Возможностей D1 достаточно для хранения заявок и защиты от повторных отправок.
 
-Нужны Node.js 24+, npm, uv. Сборка frontend не требуется.
-Python 3.11+ используется только служебными скриптами; им достаточно
-стандартной библиотеки. Старый FastAPI Worker и его зависимости удалены.
+Форма проверяет белорусский номер, сохраняет рекламные метки и страницы перехода. Повторная заявка с тем же нормализованным номером в течение 10 минут не создаётся благодаря SQL-триггеру. Уведомления в Telegram отправляются после сохранения, с повторными попытками при сбоях. Production и preview используют отдельные базы.
 
-```sh
-npm ci
-uv sync --project backend
-uv run --project backend python -m http.server 4173 --directory public
-```
+## Где ИИ ошибся и как это обнаружилось
 
-Для работы формы локально (два терминала, локальная D1):
+Изначально я планировал бэк на Python/FastAPI (привычный мне стек) в Cloudflare Workers. Во время проверки агент обнаружил, что обработка запроса занимает больше CPU-времени, чем допускает бесплатный тариф. Мы сохранили Cloudflare Workers, но переписали бэкенд на JavaScript.
 
-```sh
-uv run --project backend python scripts/cloudflare.py worker d1 migrations apply kvarta-leads-preview --env preview --local
-uv run --project backend python scripts/cloudflare.py worker dev --env preview
-uv run --project backend python scripts/cloudflare.py pages pages dev public --env preview --service LEADS=kvarta-api-preview
-```
+Первого промпта оказалось недостаточно. После переписывания бэкенда агент оставил устаревшие Python-файлы, которые пришлось удалять отдельным шагом. При моей проверке в Chrome на iPhone выяснилось, что при фокусе на полях экран скачет, а знак логотипа и стрелки отображаются как эмодзи. На компьютере эти проблемы не проявлялись. После замечаний агент убрал принудительную прокрутку и автофокус, а символы заменил на SVG.
 
-Тесты: `npm test` (9 сценариев на Node test/sqlite). Реальные параллельные
-запросы и D1: `uv run --project backend python scripts/check_remote.py`
-(меняет только созданные этим скриптом тестовые записи preview).
+## Проверки и что сделал бы иначе
 
-## Публикация и секреты
+В проекте есть 9 автоматических сценариев проверки API, защиты от повторов и доставки в Telegram. На моих скриншотах Lighthouse мобильная версия получила **97 / 100 / 100 / 100**, desktop — **100 / 100 / 100 / 100** (Performance / Accessibility / Best Practices / SEO). В [отдельно сохранённой серии](output/lighthouse/summary.json) из трёх мобильных запусков медиана Performance составила 98; это другой набор замеров.
 
-Wrangler Direct Upload, не Git Integration. Публикуется только `public/`.
-Конфигурации — `wrangler.jsonc` и `backend/wrangler.jsonc`, Wrangler закреплён.
-Production/preview используют разные Workers и D1. Preview Telegram выключен.
-Worker API не имеет публичного workers.dev URL; есть проверка окружения.
+В следующий раз я бы разбил работу на короткие этапы с проверкой результата после каждого, особенно после смены стека.
 
-```sh
-uv run --project backend python scripts/cloudflare.py worker d1 migrations apply kvarta-leads --remote
-uv run --project backend python scripts/cloudflare.py worker deploy --env ''
-uv run --project backend python scripts/cloudflare.py pages pages deploy public --project-name kvarta-minsk --branch main
-```
+## Скриншоты процесса и Lighthouse
 
-Перед production: tests → preview → браузер → commit. Для preview используйте
-`worker deploy --env preview` и `pages deploy ... --branch staging`.
-Нужен действующий Cloudflare OAuth (`wrangler login`) или `CLOUDFLARE_API_TOKEN`.
+<details>
+<summary>Работа с ИИ: первый результат, мобильные ошибки и доработка телефона</summary>
 
-Секреты только production Worker: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`.
-Оператор может установить их командой
-`uv run --project backend python scripts/set_telegram_secrets.py` из
-игнорируемого `.secrets/telegram.json`. Значения не выводятся и не коммитятся.
-Переменные: `ENVIRONMENT`, `TELEGRAM_ENABLED`; bindings: `LEADS`, `DB`.
+Первый результат и отчёт агента:
 
-Telegram работает после записи через Cron (одна заявка за запуск раз в минуту). Атомарный lease,
-максимум 5 попыток, timeout 8 секунд, backoff и retry_after. После
-неоднозначного timeout возможна повторная доставка с тем же ID.
+![Первый результат работы Codex](screenshots/ai-1.png)
 
-## Документация и проверки
+Мои замечания по мобильной версии:
 
-- [Полный запуск, API-контракт, миграции и ограничения](docs/operations.md).
-- [Источники и лицензии изображений, шрифтов и BY-метаданных](docs/materials.md).
-- [Фактическая проверка](docs/verification.md), [D1/Telegram](docs/production-check.json).
-- Серия замеров: `node scripts/lighthouse.mjs <deployment-url> <worker-version>`.
-- Lighthouse HTML/JSON: `output/lighthouse/`, параметры и медианы —
-  `output/lighthouse/summary.json`. Отчёты не попадают в public.
-- Исходный README пользователя сохранён: [original-readme.md](docs/original-readme.md).
+![Исправление скачков экрана и отображения символов](screenshots/ai-2.png)
 
-Ограничения: общие квоты Cloudflare Free; диапазоны номеров требуют обновления
-при смене плана нумерации; первая атрибуция живёт до конца browser session.
-Реальная клавиатура телефона и превью ссылки в мессенджере не проверены.
-Проверки HTML/OG, эмуляция экранов, axe и Lighthouse не равны WCAG-сертификации.
+Доработка маски телефона:
+
+![Запрос и результат доработки телефонного поля](screenshots/ai-3.png)
+
+</details>
+
+<details>
+<summary>Lighthouse: мобильная и настольная версии</summary>
+
+Мобильная версия:
+
+![Lighthouse Mobile: 97, 100, 100, 100](screenshots/lighthouse-mobile.jpg)
+
+Настольная версия:
+
+![Lighthouse Desktop: 100, 100, 100, 100](screenshots/lighthouse-desktop.jpg)
+
+</details>

@@ -20,14 +20,13 @@ for (const name of ['mobile-1', 'mobile-2', 'mobile-3', 'desktop']) {
   runs.push({ name, scores, fetchTime: report.fetchTime, lighthouseVersion: report.lighthouseVersion,
     requestedUrl: report.requestedUrl, finalDisplayedUrl: report.finalDisplayedUrl,
     userAgent: report.userAgent, environment: report.environment, configSettings: report.configSettings,
-    metrics: Object.fromEntries(['first-contentful-paint', 'largest-contentful-paint', 'total-blocking-time', 'cumulative-layout-shift', 'speed-index'].map(k => [k, report.audits[k].numericValue])),
-    reports: [`${name}.report.html`, `${name}.report.json`] });
+    metrics: Object.fromEntries(['first-contentful-paint', 'largest-contentful-paint', 'total-blocking-time', 'cumulative-layout-shift', 'speed-index'].map(k => [k, report.audits[k].numericValue])) });
   console.log(name, JSON.stringify(scores));
 }
 const median = values => values.sort((a, b) => a - b)[Math.floor(values.length / 2)];
 const mobileMedian = Object.fromEntries(Object.keys(runs[0].scores).map(k => [k, median(runs.slice(0, 3).map(r => r.scores[k]))]));
 const files = ['public/index.html', 'public/style.css', 'public/app.js', 'public/phone.js', 'functions/api/lead.js', 'backend/src/worker.js'];
-const summary = { url, clientDate: '2026-10-17', timezone: 'Europe/Minsk', sourceCommit: commit,
+const summary = { url, sourceCommit: commit,
   pagesDeployment, workerVersion,
   protocol: 'Sequential CLI runs on the same host. Each run launches a fresh headless Chrome profile. Three identical default mobile/simulate runs; separate desktop preset. No local scores.',
   hashes: Object.fromEntries(files.map(f => [f, createHash('sha256').update(readFileSync(f)).digest('hex')])),

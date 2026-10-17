@@ -24,9 +24,3 @@ def api(path, method="GET", body=None):
     if not result.get("success"):
         raise RuntimeError("Cloudflare operation failed")
     return result["result"]
-
-
-if __name__ == "__main__":
-    for path in ["subscriptions", "workers/subdomain", "d1/database", "pages/projects"]:
-        result = api(f"accounts/{ACCOUNT}/{path}")
-        print(path, json.dumps(result, ensure_ascii=False)[:6000])

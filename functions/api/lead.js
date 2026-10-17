@@ -1,4 +1,4 @@
-// Only transport and trust-boundary checks; lead logic lives in Python.
+// Only transport and trust-boundary checks; lead logic lives in the Worker.
 export async function onRequest({ request, env }) {
   const headers = { "Cache-Control": "no-store" };
   const fail = (status, code) => Response.json({ ok: false, code }, { status, headers });

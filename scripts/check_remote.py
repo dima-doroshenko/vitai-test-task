@@ -57,5 +57,7 @@ if __name__ == '__main__':
     summary = {'url': URL, 'fixture': name, 'parallel_requests': 20, 'accepted': 1, 'duplicates': 19,
                'new_after_600_seconds': True, 'invalid_requests_write_nothing': True,
                'attribution_verified_in_real_d1': True, 'preview_telegram': 'disabled', 'lead_id': lead_id}
-    (ROOT / 'docs/remote-check.json').write_text(json.dumps(summary, indent=2, ensure_ascii=False) + '\n')
+    output = ROOT / 'output/remote-check.json'
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(summary, indent=2, ensure_ascii=False) + '\n')
     print(json.dumps(summary, ensure_ascii=False))

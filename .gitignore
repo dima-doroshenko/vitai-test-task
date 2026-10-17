@@ -8,5 +8,7 @@ __pycache__/
 .secrets/
 .DS_Store
 .playwright-cli/
-output/playwright/
-output/lighthouse/initial-*
+output/*
+!output/lighthouse/
+output/lighthouse/*
+!output/lighthouse/summary.json

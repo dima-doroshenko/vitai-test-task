@@ -107,11 +107,7 @@
         "total-blocking-time": 0,
         "cumulative-layout-shift": 0,
         "speed-index": 2236.2015684206494
-      },
-      "reports": [
-        "mobile-1.report.html",
-        "mobile-1.report.json"
-      ]
+      }
     },
     {
       "name": "mobile-2",
@@ -199,11 +195,7 @@
         "total-blocking-time": 0,
         "cumulative-layout-shift": 0,
         "speed-index": 4069.0447838543887
-      },
-      "reports": [
-        "mobile-2.report.html",
-        "mobile-2.report.json"
-      ]
+      }
     },
     {
       "name": "mobile-3",
@@ -291,11 +283,7 @@
         "total-blocking-time": 0,
         "cumulative-layout-shift": 0,
         "speed-index": 4077.0746139716143
-      },
-      "reports": [
-        "mobile-3.report.html",
-        "mobile-3.report.json"
-      ]
+      }
     },
     {
       "name": "desktop",
@@ -383,11 +371,7 @@
         "total-blocking-time": 0,
         "cumulative-layout-shift": 5.83451536643026e-05,
         "speed-index": 818.2434979777694
-      },
-      "reports": [
-        "desktop.report.html",
-        "desktop.report.json"
-      ]
+      }
     }
   ],
   "pagesDeploymentId": "397d9ffb-91b1-4dd5-ac9b-1ebdb3103d43",
