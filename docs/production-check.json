@@ -35,5 +35,8 @@
       "telegram_attempts": 1,
       "telegram_error": null
     }
-  ]
+  ],
+  "normalized_phone_verified": true,
+  "final_worker_version": "60fd62c5-332c-4e11-b4de-26f7351ac46d",
+  "final_pages_deployment": "3ad5aa00-c55c-49a2-ba91-7da2b36ac894"
 }

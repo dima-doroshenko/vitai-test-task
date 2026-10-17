@@ -9,9 +9,7 @@ __pycache__/
 .DS_Store
 .playwright-cli/
 output/playwright/
-output/lighthouse/*.html
-output/lighthouse/*.json
-!output/lighthouse/summary.json
+output/lighthouse/initial-*
 backend/python_modules/
 
 .venv-workers/
