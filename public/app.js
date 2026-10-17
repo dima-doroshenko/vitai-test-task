@@ -9,6 +9,17 @@ try{const saved=JSON.parse(sessionStorage.getItem('kvarta-first-touch'));if(save
 const current=keys.some(k=>touch[k])?touch:null;
 const form=document.querySelector('#lead-form'),submit=document.querySelector('#submit'),status=document.querySelector('#form-status');
 const fields=['name','phone','interest','comment'];submit.disabled=false;let sending=false;
+// Keep the whole active field above a mobile keyboard, including browsers
+// that resize only visualViewport rather than the layout viewport.
+function keepFieldVisible(){
+  const active=document.activeElement;
+  if(!form.contains(active)||!active.matches('input:not([type="hidden"]),select,textarea'))return;
+  const view=window.visualViewport,top=view?.offsetTop||0,height=view?.height||innerHeight;
+  const rect=active.getBoundingClientRect();
+  if(rect.top<top+16||rect.bottom>top+height-16)window.scrollBy({top:rect.top-top-Math.max(16,(height-rect.height)/2),behavior:'instant'});
+}
+form.addEventListener('focusin',keepFieldVisible);
+window.visualViewport?.addEventListener('resize',keepFieldVisible);
 function error(k,message=''){const input=form.elements[k],target=document.querySelector(`#${k}-error`);if(input&&target){target.textContent=message;if(message)input.setAttribute('aria-invalid','true');else input.removeAttribute('aria-invalid');}}
 for(const k of fields)form.elements[k].addEventListener('input',()=>error(k));
 document.querySelectorAll('[data-interest]').forEach(link=>link.addEventListener('click',()=>{form.elements.interest.value=link.dataset.interest;form.elements.context.value=link.dataset.context||'';const label=document.querySelector('#context-label');label.hidden=!link.dataset.context;label.textContent=link.dataset.context?`Вы выбрали: ${link.dataset.context}`:'';error('interest');setTimeout(()=>{if(!sending)form.elements.name.focus({preventScroll:true});},matchMedia('(prefers-reduced-motion: reduce)').matches?0:350);}));
