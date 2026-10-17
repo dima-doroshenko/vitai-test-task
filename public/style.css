@@ -11,4 +11,14 @@
 @media(min-width:761px) and (max-width:1100px){.hero h1{font-size:clamp(3.25rem,6.9vw,5.1rem)}.hero-stamp{top:20px;width:80px;height:80px;left:calc(50% - 40px)}.hero-stamp strong{font-size:1.8rem}.hero-stamp span{font-size:.36rem}}
 .contact-grid>*{min-width:0}
 .delivery-number{opacity:1;color:var(--muted)}
+.about>*,.subscription>*,.delivery>*,.footer>*{min-width:0}
+h1,h2,h3,.text-link,.footer p{overflow-wrap:anywhere}
+.text-link{max-width:100%}
+.subscription-price{flex-wrap:wrap}
+.header{flex-wrap:wrap;padding-block:14px}.header nav{flex-wrap:wrap;min-width:0}.header-cta{white-space:normal;min-width:0}
+.freshness{grid-template-columns:repeat(3,minmax(0,1fr))}.freshness>div{min-width:0;flex-wrap:wrap}.freshness p{min-width:0;overflow-wrap:anywhere}
+.button{max-width:100%;gap:clamp(12px,2.5vw,36px)}.price-row{flex-wrap:wrap;gap:8px}.delivery-options article>div{min-width:0}
+@media(max-width:1100px) and (min-width:761px){.products{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.freshness{grid-template-columns:1fr}.freshness>div{flex-wrap:nowrap}}
+@media(max-width:760px){.button{min-width:0!important;max-width:100%;gap:14px}.hero .button{min-width:min(270px,100%)!important}.subscription .button{min-width:min(260px,100%)!important}.header-cta{white-space:normal}.freshness>div{min-width:0}.fact-number,.fact-icon{flex-shrink:0}.freshness p{min-width:0}.delivery-options article>div{min-width:0}.footer{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 @media(max-width:760px){.contact-copy h2 br:first-of-type{display:initial}}

@@ -12,7 +12,7 @@
   },
   "vars": {
     "ENVIRONMENT": "production",
-    "TELEGRAM_ENABLED": "false"
+    "TELEGRAM_ENABLED": "true"
   },
   "d1_databases": [
     {

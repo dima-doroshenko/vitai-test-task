@@ -18,7 +18,7 @@ if(!data.name.trim())errors.name='Подскажите, как к вам обр�
 const phone=normalizePhone(data.phone);if(!phone)errors.phone='Проверьте белорусский номер и код оператора или города. Например: +375 29 491-19-11.';
 if(!['subscription','order','question'].includes(data.interest))errors.interest='Выберите, что вас интересует.';if(data.comment.length>1000)errors.comment='Комментарий — до 1000 символов.';
 if(Object.keys(errors).length){Object.entries(errors).forEach(([k,v])=>error(k,v));status.textContent='Проверьте отмеченные поля.';form.elements[Object.keys(errors)[0]].focus();return;}
-sending=true;submit.disabled=true;form.setAttribute('aria-busy','true');submit.textContent='Отправляем…';status.textContent='Отправляем заявку.';
+sending=true;submit.disabled=true;submit.setAttribute('aria-busy','true');submit.textContent='Отправляем…';status.textContent='Отправляем заявку.';
 data.phone=phone;data.attribution={first,...(current?{current}:{}),submission_url:cleanUrl(location.href)};
 try{const response=await fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(18000)});const result=await response.json();
 if(response.status===201&&result.code==='accepted'){status.textContent='Спасибо! Заявка принята. Менеджер перезвонит, поможет выбрать кофе и оформить заказ.';status.className='success';}
@@ -26,5 +26,5 @@ else if(response.status===409&&result.code==='duplicate'){status.textContent='З
 else if(response.status===422&&result.fields){for(const[k,v]of Object.entries(result.fields))if(fields.includes(k))error(k,v);status.textContent=result.fields.form||'Проверьте отмеченные поля и попробуйте ещё раз.';const invalid=form.querySelector('[aria-invalid="true"]');if(invalid)invalid.focus();}
 else status.textContent=response.status===413?'Заявка слишком большая. Сократите комментарий и попробуйте снова.':'Сервис временно недоступен. Данные сохранены в форме — попробуйте отправить ещё раз.';
 }catch{status.textContent='Не удалось получить ответ. Возможно, заявка уже принята. Проверьте соединение и попробуйте ещё раз — повторную заявку мы не создадим в течение 10 минут.';}
-finally{sending=false;submit.disabled=false;submit.innerHTML='Оставить заявку <span aria-hidden="true">↗</span>';form.removeAttribute('aria-busy');if(!form.querySelector('[aria-invalid="true"]'))status.focus({preventScroll:false});}
+finally{sending=false;submit.disabled=false;submit.innerHTML='Оставить заявку <span aria-hidden="true">↗</span>';submit.removeAttribute('aria-busy');if(!form.querySelector('[aria-invalid="true"]'))status.focus({preventScroll:false});}
 });

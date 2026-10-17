@@ -83,6 +83,21 @@ test('D1 failure, uncertain network result, retry does not create another outbox
   assert.equal(db.count(), 1);
 });
 
+test('D1 commits but loses acknowledgment: accepted row is retried by the outbox', async () => {
+  const db = database(), env = environment(db, true);
+  const uncertain = { ...env, DB: { prepare(query) {
+    const stmt = db.DB.prepare(query);
+    return { bind(...values) { stmt.bind(...values); return this; }, async first() { await stmt.first(); throw new Error('lost D1 acknowledgment'); } };
+  } } };
+  assert.equal((await handleLead(request(payload()), uncertain, ctx)).status, 503);
+  assert.equal(db.count(), 1);
+  assert.equal((await handleLead(request(payload()), env, ctx)).status, 409);
+  const row = db.sqlite.prepare('SELECT id,telegram_status FROM leads').get();
+  assert.equal(row.telegram_status, 'pending');
+  await deliver(env, row.id, async () => Response.json({ ok: true }));
+  assert.equal(db.sqlite.prepare('SELECT telegram_status FROM leads').get().telegram_status, 'sent');
+});
+
 test('Telegram timeout after persisted lead; 429 retry-after; lease concurrency; later delivery and attempt bound', async () => {
   const db = database(), env = environment(db);
   await handleLead(request(payload()), env, ctx);

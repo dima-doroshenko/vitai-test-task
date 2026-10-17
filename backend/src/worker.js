@@ -90,7 +90,8 @@ export async function handleLead(request, env, ctx) {
     const row = await env.DB.prepare(insertLead).bind(id, value.name, value.phone, value.interest, value.comment,
       value.context, JSON.stringify(value.attribution), env.TELEGRAM_ENABLED === 'true' ? 'pending' : 'disabled').first();
     if (!row) return json(409, 'duplicate');
-    if (env.TELEGRAM_ENABLED === 'true') ctx.waitUntil(deliver(env, id).catch(() => {}));
+    // D1 is the durable outbox. Cron sends one notification per invocation,
+    // keeping Telegram serialization/network bookkeeping out of the 10ms lead budget.
     return json(201, 'accepted', { id: row.id });
   } catch { return json(503, 'unavailable'); }
 }
@@ -154,7 +155,7 @@ export async function retryNotifications(env) {
   await env.DB.prepare(`UPDATE leads SET telegram_status='failed',telegram_error='attempts_exhausted'
     WHERE telegram_status IN ('pending','sending') AND telegram_attempts>=5 AND telegram_next_at<=unixepoch()`).run();
   const { results } = await env.DB.prepare(`SELECT id FROM leads WHERE telegram_status IN ('pending','sending')
-    AND telegram_attempts<5 AND telegram_next_at<=unixepoch() ORDER BY telegram_next_at LIMIT 5`).all();
+    AND telegram_attempts<5 AND telegram_next_at<=unixepoch() ORDER BY telegram_next_at LIMIT 1`).all();
   for (const row of results) await deliver(env, row.id);
 }
 

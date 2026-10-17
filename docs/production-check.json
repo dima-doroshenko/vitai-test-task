@@ -1,0 +1,39 @@
+{
+  "url": "https://kvarta-minsk.pages.dev/",
+  "date": "2026-10-17",
+  "test_lead_id": "54abc95a-a213-4a21-a461-7b4324fb428f",
+  "record_count": 1,
+  "telegram_status": "sent",
+  "telegram_attempts": 1,
+  "attribution": {
+    "first": {
+      "utm_source": "instagram",
+      "utm_medium": "cpc",
+      "utm_campaign": "TEST-production",
+      "utm_content": "creative",
+      "utm_term": "coffee",
+      "yclid": "TEST-y",
+      "fbclid": "TEST-fb",
+      "gclid": "TEST-g",
+      "entry_url": "https://kvarta-minsk.pages.dev/?utm_source=instagram&utm_medium=cpc&utm_campaign=TEST-production&utm_content=creative&utm_term=coffee&yclid=TEST-y&fbclid=TEST-fb&gclid=TEST-g"
+    },
+    "current": {
+      "utm_source": "yandex",
+      "utm_medium": "cpc",
+      "utm_campaign": "TEST-current",
+      "yclid": "TEST-current-y",
+      "entry_url": "https://kvarta-minsk.pages.dev/?utm_source=yandex&utm_medium=cpc&utm_campaign=TEST-current&yclid=TEST-current-y"
+    },
+    "submission_url": "https://kvarta-minsk.pages.dev/?utm_source=yandex&utm_medium=cpc&utm_campaign=TEST-current&yclid=TEST-current-y"
+  },
+  "created_at_utc_epoch": 1792242002,
+  "cron_test": [
+    {
+      "id": "8d40b42d-e21d-4762-b725-6e47aefacc4e",
+      "created_at": 1792242503,
+      "telegram_status": "sent",
+      "telegram_attempts": 1,
+      "telegram_error": null
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-17",
+  "worker_version": "60fd62c5-332c-4e11-b4de-26f7351ac46d",
+  "source": "wrangler tail live production",
+  "samples": [
+    {
+      "cpu_ms": 1,
+      "wall_ms": 553,
+      "outcome": "ok",
+      "event": "* * * * *",
+      "timestamp": 1792242483455
+    },
+    {
+      "cpu_ms": 3,
+      "wall_ms": 51,
+      "outcome": "ok",
+      "event": 201,
+      "timestamp": 1792242503138
+    },
+    {
+      "cpu_ms": 3,
+      "wall_ms": 2860,
+      "outcome": "ok",
+      "event": "* * * * *",
+      "timestamp": 1792242543639
+    }
+  ]
+}

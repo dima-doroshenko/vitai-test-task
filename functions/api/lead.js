@@ -12,13 +12,15 @@ export async function onRequest({ request, env }) {
   const reader = request.body?.getReader();
   const chunks = []; let size = 0;
   if (!reader) return fail(400, "invalid_json");
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    size += value.byteLength;
-    if (size > 8192) { await reader.cancel(); return fail(413, "body_too_large"); }
-    chunks.push(value);
-  }
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > 8192) { await reader.cancel(); return fail(413, "body_too_large"); }
+      chunks.push(value);
+    }
+  } catch { return fail(400, "invalid_body"); }
   const body = new Uint8Array(size); let offset = 0;
   for (const chunk of chunks) { body.set(chunk, offset); offset += chunk.length; }
   try {
